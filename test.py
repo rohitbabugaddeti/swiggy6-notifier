@@ -2,6 +2,8 @@ import scrapy,requests,urllib
 from bs4 import BeautifulSoup
 from lxml import html
 from urllib import request,response
+import time
+import shelve
 headers= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
 
 #res=requests.get('https://cricbuzz.com/live-cricket-scores/22458/',allow_redirects=False) #cricbuzz is rejecting anonymous requests without headers and redirecting it to home page
@@ -14,7 +16,7 @@ headers= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML,
 #print(src)
 #print("end")
 def bs():
-    url='https://www.cricbuzz.com/live-cricket-scores/22459/'
+    url='https://www.cricbuzz.com/live-cricket-scores/22460/'
     req = urllib.request.Request(url=url, headers=headers)
     html=urllib.request.urlopen(req)
     soup=BeautifulSoup(html,'html.parser')
@@ -22,8 +24,13 @@ def bs():
 
     #class ="cb-col cb-col-67 cb-nws-lft-col cb-comm-pg"
     root=soup.find('div',{'class':'cb-col cb-col-100 cb-font-12 cb-text-gray cb-min-rcnt'})
+    temp=soup.find('div',{'class':"cb-mat-mnu-wrp cb-ovr-num"})
+    print("temp",list(temp))
+    if '.6' in list(temp)[0]:
+        print('_____________Over complete_______')
     print("1:",list(root.span.next_sibling))
-    data=list(list(root.span.next_sibling)[0].replace(" ","").replace("|",""))
+    data=list(list(root.span.next_sibling)[0].replace("|","").replace(" ",""))
+    print(len(data))
     print(data)
     print(data[len(data)-2],data[len(data)-1])
     #main=soup.find('div',{'ng-show':'!isCommentaryRendered'})
@@ -40,6 +47,10 @@ def bs():
         print(False)
 
 bs()
+# start=time.time()
+# while True:
+#     bs()
+
 class Sw6(scrapy.Spider):
     name = "Swiggy6Notifier"
     urls=['https://cricbuzz.com/live-cricket-scores/22458']
