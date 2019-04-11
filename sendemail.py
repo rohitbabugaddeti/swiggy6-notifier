@@ -10,7 +10,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 sender_email='gvp.webchamp@gmail.com'
-receiver_email = 'rohitbabug81@gmail.com'
+# receiver_email = 'rohitbabug81@gmail.com'
+receiver_email = 'abcd@tbdn.com'
 password = 'webchamp@2k19'
 
 message = MIMEMultipart("alternative")
