@@ -28,11 +28,14 @@ def bs():
     print("temp",list(temp))
     if '.6' in list(temp)[0]:
         print('_____________Over complete_______')
-    print("1:",list(root.span.next_sibling))
-    data=list(list(root.span.next_sibling)[0].replace("|","").replace(" ",""))
-    print(len(data))
-    print(data)
-    print(data[len(data)-2],data[len(data)-1])
+    #print('test: ',root)
+    try:
+        print("1:", list(root.span.next_sibling))
+        data = list(root.span.next_sibling)[0].strip().replace("|", "").split(" ")
+        print(len(data))
+        print(data)
+        print(data[len(data) - 2], data[len(data) - 1])
+        print("Match complete!")
     #main=soup.find('div',{'ng-show':'!isCommentaryRendered'})
     #comm=main.find('div',{'class':'"cb-col cb-col-100"'})
     #comm=main.div
@@ -41,10 +44,12 @@ def bs():
     #print('--------------------------------')
     #print(comm)
     #print(l)
-    if '6' in data[len(data)-1]:
-        print(True)
-    else:
-        print(False)
+        if '6' in data[len(data)-1]:
+            print(True)
+        else:
+            print(False)
+    except Exception:
+        print("Match Complete!")
 
 bs()
 # start=time.time()
