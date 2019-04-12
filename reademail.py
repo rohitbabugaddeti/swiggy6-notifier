@@ -33,7 +33,7 @@ s=shelve.open('test.db',writeback=True)
 try:
     old=s['emails']
     print('old: ',s['emails'])
-    old=old.union(emails)
+    old.update(emails)
     s['emails']=old
     print('updated old: ',s['emails'])
 except KeyError:
