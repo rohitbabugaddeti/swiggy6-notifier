@@ -3,7 +3,6 @@ import email
 import shelve
 emails=set()
 
-#new_uid_list=[]
 mail=imaplib.IMAP4_SSL("imap.gmail.com")
 mail.login("gvp.webchamp@gmail.com","webchamp@2k19")
 mail.list()
@@ -11,8 +10,7 @@ mail.select("inbox")
 
 assam,data=mail.uid('search',None,'ALL')
 uids_list=data[0].split()
-#first_email_uid=uids_list[0]
-#latest_email_uid=uids_list[-1]
+
 #print(first_email_uid,latest_email_uid)
 for i in uids_list[::-1]:
     assam,data=mail.uid('fetch',i,'(RFC822)')
@@ -23,7 +21,7 @@ for i in uids_list[::-1]:
     #print(data[0])
     email_from=str(email.header.make_header(email.header.decode_header(email_message['From'])))
     email_subj=str(email.header.make_header(email.header.decode_header(email_message['Subject'])))
-    print('email subject: ',email_subj)
+    #print('email subject: ',email_subj)
     if 'remove' in email_subj.replace(' ','').lower():
         s=shelve.open('test.db',writeback=True)
         mails=s['emails']
