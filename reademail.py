@@ -4,7 +4,7 @@ import shelve
 emails=set()
 
 mail=imaplib.IMAP4_SSL("imap.gmail.com")
-mail.login("gvp.webchamp@gmail.com","webchamp@2k19")
+mail.login("mailid","password")
 mail.list()
 mail.select("inbox")
 
