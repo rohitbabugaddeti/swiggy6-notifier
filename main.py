@@ -13,8 +13,8 @@ def sendemail():
     from email.mime.multipart import MIMEMultipart
     import shelve
 
-    sender_email = 'swiggy6notifier@gmail.com'
-    password = 'rohit@swiggy6'
+    sender_email = 'yoursenderemail'
+    password = 'yourpassword'
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "It's a SIX! in the match"
