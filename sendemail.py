@@ -10,9 +10,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import shelve
 
-sender_email='swiggy6notifier@gmail.com'
+sender_email='youremail'
 #receiver_email = 'rohitbabug81@gmail.com'
-password = 'rohit@swiggysix'
+password = 'yourpassword'
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "It's a SIX! in the match"
