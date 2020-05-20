@@ -6,48 +6,50 @@ from urllib.error import URLError
 import time
 import shelve
 from threading import Thread
-headers= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
-def sendemail():
-    import smtplib, ssl
-    from email.mime.text import MIMEText
-    from email.mime.multipart import MIMEMultipart
-    import shelve
+from sendemail import send
 
-    sender_email = 'yoursenderemail'
-    password = 'yourpassword'
+# headers= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+# def sendemail():
+#     import smtplib, ssl
+#     from email.mime.text import MIMEText
+#     from email.mime.multipart import MIMEMultipart
+#     import shelve
 
-    message = MIMEMultipart("alternative")
-    message["Subject"] = "It's a SIX! in the match"
-    message["From"] = sender_email
-    html = """\
-        <html>
-          <body>
-            <center><h2><b>Yay!</b><br>
-               That's a <b style="color:red">Six!</b><br>
-            </h2>
-            <h3>Apply <span style="color:red">SWIGGY6</span> within 6 mins and enjoy 60% OFF upto 60</h3>
-            <a href='https://www.swiggy.com/'>click here</a>
-            </center>
-          </body>
-        </html>
-        """
+#     sender_email = 'yoursenderemail'
+#     password = 'yourpassword'
 
-    content = MIMEText(html, "html")
+#     message = MIMEMultipart("alternative")
+#     message["Subject"] = "It's a SIX! in the match"
+#     message["From"] = sender_email
+#     html = """\
+#         <html>
+#           <body>
+#             <center><h2><b>Yay!</b><br>
+#                That's a <b style="color:red">Six!</b><br>
+#             </h2>
+#             <h3>Apply <span style="color:red">SWIGGY6</span> within 6 mins and enjoy 60% OFF upto 60</h3>
+#             <a href='https://www.swiggy.com/'>click here</a>
+#             </center>
+#           </body>
+#         </html>
+#         """
 
-    message.attach(content)
+#     content = MIMEText(html, "html")
 
-    # Create secure connection with server and send email
-    context = ssl.create_default_context()
-    with shelve.open('test.db') as sobj:
-        receiver_emails = sobj['emails']
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-        server.login(sender_email, password)
-        for rec_mail_id in receiver_emails:
-            server.sendmail(
-                sender_email, rec_mail_id, message.as_string()
-            )
+#     message.attach(content)
 
-    print('email sending done!')
+#     # Create secure connection with server and send email
+#     context = ssl.create_default_context()
+#     with shelve.open('test.db') as sobj:
+#         receiver_emails = sobj['emails']
+#     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+#         server.login(sender_email, password)
+#         for rec_mail_id in receiver_emails:
+#             server.sendmail(
+#                 sender_email, rec_mail_id, message.as_string()
+#             )
+
+#     print('email sending done!')
 
 with shelve.open('m_id.db') as m_idobj:
     try:
@@ -113,7 +115,7 @@ while True:
         break
     elif res==True:
         print("Six!")
-        Thread(target=sendemail).start()
+        Thread(target=send).start()
         time.sleep(15) #45
     # elif res=='over complete':
     #     time.sleep(20) #70
