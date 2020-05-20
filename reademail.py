@@ -1,3 +1,9 @@
+"""
+Use this script to read incoming mails and make changes accordingly. If the mail says to add, script will add the email id to mailing list.
+Same for remove as well.
+"""
+
+
 import imaplib
 import email
 import shelve
