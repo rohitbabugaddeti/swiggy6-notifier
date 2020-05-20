@@ -1,3 +1,7 @@
+"""
+Initial script for testing. Ignore this file.
+"""
+
 import urllib
 from bs4 import BeautifulSoup
 from urllib import request
